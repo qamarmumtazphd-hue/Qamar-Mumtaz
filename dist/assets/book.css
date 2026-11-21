@@ -1,0 +1,32 @@
+/* Decorative, one-time page-turn sequence. The existing book photo remains
+   visible without JavaScript and for users who prefer reduced motion. */
+.hero-art{perspective:1100px;isolation:isolate}
+.hero-art .hero-book-base{transform-origin:44% 60%;backface-visibility:hidden}
+.book-turns{position:absolute;inset:0;z-index:1;pointer-events:none;perspective:1050px}
+.hero-art .book-leaf{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 52%;mask-image:none;opacity:0;
+  clip-path:polygon(44% 27%,74% 6%,89% 47%,90% 64%,58% 80%,45% 64%);
+  transform-origin:44% 55%;backface-visibility:hidden;
+  filter:brightness(1.045);will-change:transform,opacity;
+}
+.hero-art.book-open .hero-book-base{animation:book-settle 2.2s cubic-bezier(.22,.61,.36,1) both}
+.hero-art.book-open .book-leaf{animation:book-leaf-turn 1.24s cubic-bezier(.44,.05,.25,1) both}
+.hero-art.book-open .book-leaf-1{animation-delay:.08s}
+.hero-art.book-open .book-leaf-2{animation-delay:.51s}
+.hero-art.book-open .book-leaf-3{animation-delay:.92s}
+@keyframes book-settle{
+  0%{transform:rotateY(5deg) translateY(7px) scale(.985)}
+  100%{transform:none}
+}
+@keyframes book-leaf-turn{
+  0%{opacity:1;transform:rotateY(0deg)}
+  42%{opacity:1;transform:rotateY(-78deg)}
+  75%{opacity:.74;transform:rotateY(-139deg)}
+  100%{opacity:0;transform:rotateY(-165deg)}
+}
+@media(max-width:650px){.book-turns{display:none}}
+@media(prefers-reduced-motion:reduce){
+  .book-turns{display:none!important}
+  .hero-art.book-open .hero-book-base{animation:none!important}
+}
