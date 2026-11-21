@@ -1,0 +1,36 @@
+/* The still and the film share a crop, keeping the binding in one place. */
+.book-art picture,
+.book-art img,
+.book-art video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.book-art video {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: 50% 52%;
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 99%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.book-art.is-opening video { opacity: .97; }
+
+@media (max-width: 650px) {
+  .hero-art.book-art {
+    aspect-ratio: 1.7;
+    max-height: 280px;
+  }
+
+  .book-art video {
+    object-position: 50% 53%;
+    mask-image: linear-gradient(to bottom, transparent, #000 15%, #000);
+  }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .book-art video { display: none; }
+}
