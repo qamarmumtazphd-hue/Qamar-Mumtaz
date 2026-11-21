@@ -1,0 +1,87 @@
+/* The book photograph and film share a 3:2 frame. Keep the whole binding in view. */
+.hero-grid {
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3.6vw, 3.75rem);
+  min-height: 0;
+  padding-block: clamp(2.25rem, 3.8vw, 3.8rem);
+}
+.hero-copy { padding: 0; }
+.hero-kicker { margin: 0 0 .95rem; }
+.hero h1 {
+  font-size: clamp(3.05rem, 5.35vw, 5.25rem);
+  line-height: 1.04;
+  letter-spacing: -.052em;
+  margin: 0 0 .8rem;
+}
+.hero h1 em { display: inline; padding: 0; }
+.hero-credential {
+  margin: 0 0 1.05rem;
+  line-height: 1.5;
+  font-size: .85rem;
+  align-items: baseline;
+}
+.hero-credential svg { align-self: flex-start; margin-top: 2px; }
+.hero-lede {
+  max-width: 45ch;
+  font-size: clamp(1.02rem, 1.24vw, 1.15rem);
+  line-height: 1.58;
+  margin: 0 0 1.25rem;
+}
+.hero-actions { gap: .5rem 1.1rem; }
+.hero-actions .ghost-btn {
+  padding-inline: .1rem;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: .23em;
+}
+.hero-actions .ghost-btn:hover { background: transparent; color: var(--gold); }
+.hero-art.book-art {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  margin: 0;
+  max-height: none;
+}
+.book-art picture, .book-art img, .book-art video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.book-art img, .book-art video {
+  object-fit: contain;
+  object-position: center;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 98%, transparent);
+}
+.book-art video {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.book-art.is-opening video { opacity: .97; }
+@media (min-width: 721px) and (max-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .88fr); }
+  .hero h1 { font-size: clamp(2.8rem, 6.2vw, 3.5rem); }
+}
+@media (max-width: 720px) {
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.15rem;
+    padding-block: 1.8rem 1.15rem;
+  }
+  .hero-kicker { font-size: .7rem; margin-bottom: .8rem; }
+  .hero h1 { font-size: clamp(2.55rem, 9.4vw, 3.6rem); margin-bottom: .55rem; }
+  .hero-credential { margin-bottom: .9rem; font-size: .8125rem; }
+  .hero-lede { font-size: 1rem; line-height: 1.5; margin-bottom: 1rem; }
+  .hero-actions .btn { font-size: .875rem; }
+  .hero-actions .gold-btn { padding-inline: .85rem; }
+  .hero-art.book-art { width: min(84%, 21rem); align-self: center; }
+}
+@media (prefers-reduced-motion: reduce), print {
+  .book-art video { display: none; }
+}
+@media print {
+  .hero-grid, .hero-copy { min-height: 0; padding-block: 1rem; }
+  .hero-art.book-art { display: none; }
+}
